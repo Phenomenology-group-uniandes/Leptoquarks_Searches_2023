@@ -1,0 +1,16 @@
+import model sm-no_b_mass
+set zerowidth_tchannel FALSE
+
+define wpm = w+ w-
+define top = t t~
+generate  p p > top wpm
+add process  p p > top j $ wpm
+
+output /disco4/personal_folders/Joaquin/SM_Backgrounds/Data/stop -nojpeg
+
+launch /disco4/personal_folders/Joaquin/SM_Backgrounds/Data/stop -m 
+10
+shower = Pythia8
+set nevents 50000
+set ebeam1 6800
+set ebeam2 6800
