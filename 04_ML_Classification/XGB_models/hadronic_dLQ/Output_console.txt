@@ -1,0 +1,131 @@
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 500}
+The most important variables are:
+['pT_{#tau_{1}}(GeV)', '#Delta #eta_{b_{1}b_{2}}', '#Delta R_{#tau_{1}b_{1}}', '#Delta #phi_{#tau_{1}#tau_{2}}', '#Delta #phi_{#tau_{2}MET}', '#Delta #phi_{b_{1}b_{2}}', '#Delta R_{b_{1}b_{2}}', '#phi_{b_{2}}', '#phi_{MET}', '#eta_{#tau_{1}}']
+================================================================================================================================================================
+Mass: 1250, channel: hadronic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 250}
+The train accuracy is 0.9322130447166049 and the test test accuracy is 0.8940774487471527
+The most important variables are:
+                                0         1
+0              pT_{#tau_{1}}(GeV)  0.704677
+1       #Delta #phi_{#tau_{2}MET}  0.063399
+2  #Delta #phi_{#tau_{1}#tau_{2}}  0.055501
+3        #Delta #eta_{b_{1}b_{2}}  0.039873
+4           #Delta R_{b_{1}b_{2}}  0.027654
+5                      #phi_{MET}  0.023468
+6        #Delta #phi_{b_{1}b_{2}}  0.023431
+7        #Delta R_{#tau_{1}b_{1}}  0.023042
+8                 #eta_{#tau_{1}}  0.020200
+9                    #phi_{b_{2}}  0.018755
+trainLab size: 7022, trainPred size: 7022
+signal_dict = {'LQ_LQ_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1250/LQ_LQ_1250_hadronic_dLQ.csv'], 'Tau_LQ_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1250/Tau_LQ_1250_hadronic_dLQ.csv'], 'Tau_Tau_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1250/Tau_Tau_1250_hadronic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_dLQ/M1250_XGB.joblib
+================================================================================================================================================================
+Mass: 1500, channel: hadronic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 125}
+The train accuracy is 0.9197646429526611 and the test test accuracy is 0.8941176470588236
+The most important variables are:
+                                0         1
+0              pT_{#tau_{1}}(GeV)  0.723158
+1  #Delta #phi_{#tau_{1}#tau_{2}}  0.057013
+2       #Delta #phi_{#tau_{2}MET}  0.054154
+3        #Delta #eta_{b_{1}b_{2}}  0.040324
+4           #Delta R_{b_{1}b_{2}}  0.027304
+5        #Delta R_{#tau_{1}b_{1}}  0.023574
+6                 #eta_{#tau_{1}}  0.019533
+7        #Delta #phi_{b_{1}b_{2}}  0.019292
+8                    #phi_{b_{2}}  0.018852
+9                      #phi_{MET}  0.016799
+trainLab size: 7478, trainPred size: 7478
+signal_dict = {'LQ_LQ_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1500/LQ_LQ_1500_hadronic_dLQ.csv'], 'Tau_LQ_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1500/Tau_LQ_1500_hadronic_dLQ.csv'], 'Tau_Tau_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1500/Tau_Tau_1500_hadronic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_dLQ/M1500_XGB.joblib
+================================================================================================================================================================
+Mass: 1750, channel: hadronic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 125}
+The train accuracy is 0.9273728017183515 and the test test accuracy is 0.9130434782608695
+The most important variables are:
+                                0         1
+0              pT_{#tau_{1}}(GeV)  0.708786
+1  #Delta #phi_{#tau_{1}#tau_{2}}  0.071703
+2       #Delta #phi_{#tau_{2}MET}  0.051270
+3        #Delta #eta_{b_{1}b_{2}}  0.046849
+4           #Delta R_{b_{1}b_{2}}  0.031620
+5        #Delta R_{#tau_{1}b_{1}}  0.027671
+6        #Delta #phi_{b_{1}b_{2}}  0.019619
+7                    #phi_{b_{2}}  0.016240
+8                      #phi_{MET}  0.015658
+9                 #eta_{#tau_{1}}  0.010584
+trainLab size: 7449, trainPred size: 7449
+signal_dict = {'LQ_LQ_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1750/LQ_LQ_1750_hadronic_dLQ.csv'], 'Tau_LQ_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1750/Tau_LQ_1750_hadronic_dLQ.csv'], 'Tau_Tau_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1750/Tau_Tau_1750_hadronic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_dLQ/M1750_XGB.joblib
+================================================================================================================================================================
+Mass: 2000, channel: hadronic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 125}
+The train accuracy is 0.9529858564693556 and the test test accuracy is 0.912041884816754
+The most important variables are:
+                                0         1
+0              pT_{#tau_{1}}(GeV)  0.696016
+1  #Delta #phi_{#tau_{1}#tau_{2}}  0.060390
+2       #Delta #phi_{#tau_{2}MET}  0.052259
+3        #Delta #eta_{b_{1}b_{2}}  0.041784
+4        #Delta #phi_{b_{1}b_{2}}  0.029761
+5                    #phi_{b_{2}}  0.026519
+6        #Delta R_{#tau_{1}b_{1}}  0.024366
+7           #Delta R_{b_{1}b_{2}}  0.024364
+8                 #eta_{#tau_{1}}  0.023000
+9                      #phi_{MET}  0.021541
+trainLab size: 7636, trainPred size: 7636
+signal_dict = {'LQ_LQ_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2000/LQ_LQ_2000_hadronic_dLQ.csv'], 'Tau_LQ_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2000/Tau_LQ_2000_hadronic_dLQ.csv'], 'Tau_Tau_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2000/Tau_Tau_2000_hadronic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_dLQ/M2000_XGB.joblib
+================================================================================================================================================================
+Mass: 2250, channel: hadronic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 125}
+The train accuracy is 0.9325261697565898 and the test test accuracy is 0.9122541603630863
+The most important variables are:
+                                0         1
+0              pT_{#tau_{1}}(GeV)  0.711964
+1  #Delta #phi_{#tau_{1}#tau_{2}}  0.065193
+2       #Delta #phi_{#tau_{2}MET}  0.057192
+3        #Delta #eta_{b_{1}b_{2}}  0.047272
+4           #Delta R_{b_{1}b_{2}}  0.029370
+5        #Delta #phi_{b_{1}b_{2}}  0.022126
+6        #Delta R_{#tau_{1}b_{1}}  0.021055
+7                 #eta_{#tau_{1}}  0.018467
+8                    #phi_{b_{2}}  0.013908
+9                      #phi_{MET}  0.013453
+trainLab size: 7929, trainPred size: 7929
+signal_dict = {'LQ_LQ_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2250/LQ_LQ_2250_hadronic_dLQ.csv'], 'Tau_LQ_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2250/Tau_LQ_2250_hadronic_dLQ.csv'], 'Tau_Tau_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2250/Tau_Tau_2250_hadronic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_dLQ/M2250_XGB.joblib
+================================================================================================================================================================
+Mass: 2500, channel: hadronic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 125}
+The train accuracy is 0.9345316189976384 and the test test accuracy is 0.9213011542497377
+The most important variables are:
+                                0         1
+0              pT_{#tau_{1}}(GeV)  0.709904
+1  #Delta #phi_{#tau_{1}#tau_{2}}  0.072457
+2       #Delta #phi_{#tau_{2}MET}  0.050513
+3        #Delta #eta_{b_{1}b_{2}}  0.044215
+4        #Delta R_{#tau_{1}b_{1}}  0.028091
+5           #Delta R_{b_{1}b_{2}}  0.025802
+6        #Delta #phi_{b_{1}b_{2}}  0.019607
+7                 #eta_{#tau_{1}}  0.019219
+8                    #phi_{b_{2}}  0.015512
+9                      #phi_{MET}  0.014679
+trainLab size: 7622, trainPred size: 7622
+signal_dict = {'LQ_LQ_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2500/LQ_LQ_2500_hadronic_dLQ.csv'], 'Tau_LQ_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2500/Tau_LQ_2500_hadronic_dLQ.csv'], 'Tau_Tau_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2500/Tau_Tau_2500_hadronic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_dLQ/M2500_XGB.joblib
+The channel hadronic_dLQ takes 0.16063850793573592 hours.

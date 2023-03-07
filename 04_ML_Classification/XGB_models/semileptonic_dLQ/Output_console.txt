@@ -1,0 +1,131 @@
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 500}
+The most important variables are:
+['sT(GeV)', 'Q_{lep_{1}}Q_{#tau_{1}}', '#Delta #eta_{b_{1}b_{2}}', '#Delta #phi_{lep_{1}MET}', '#Delta #phi_{lep_{1}#tau_{1}}', '#Delta R_{b_{1}b_{2}}', '#Delta #phi_{b_{2}MET}', '#phi_{#tau_{1}}', '#Delta #eta_{lep_{1}#tau_{1}}', '#phi_{lep_{1}}']
+================================================================================================================================================================
+Mass: 1250, channel: semileptonic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 9, 'n_estimators': 500}
+The train accuracy is 1.0 and the test test accuracy is 0.931390977443609
+The most important variables are:
+                               0         1
+0                        sT(GeV)  0.500090
+1        Q_{lep_{1}}Q_{#tau_{1}}  0.197890
+2  #Delta #phi_{lep_{1}#tau_{1}}  0.089361
+3       #Delta #phi_{lep_{1}MET}  0.053783
+4       #Delta #eta_{b_{1}b_{2}}  0.038897
+5          #Delta R_{b_{1}b_{2}}  0.031445
+6  #Delta #eta_{lep_{1}#tau_{1}}  0.029429
+7         #Delta #phi_{b_{2}MET}  0.023633
+8                 #phi_{lep_{1}}  0.017922
+9                #phi_{#tau_{1}}  0.017549
+trainLab size: 8510, trainPred size: 8510
+signal_dict = {'LQ_LQ_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1250/LQ_LQ_1250_semileptonic_dLQ.csv'], 'Tau_LQ_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1250/Tau_LQ_1250_semileptonic_dLQ.csv'], 'Tau_Tau_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1250/Tau_Tau_1250_semileptonic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_semileptonic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_semileptonic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/semileptonic_dLQ/M1250_XGB.joblib
+================================================================================================================================================================
+Mass: 1500, channel: semileptonic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 125}
+The train accuracy is 0.967924126172208 and the test test accuracy is 0.9369138959931799
+The most important variables are:
+                               0         1
+0                        sT(GeV)  0.603573
+1  #Delta #phi_{lep_{1}#tau_{1}}  0.104845
+2        Q_{lep_{1}}Q_{#tau_{1}}  0.081415
+3       #Delta #phi_{lep_{1}MET}  0.051438
+4       #Delta #eta_{b_{1}b_{2}}  0.046502
+5          #Delta R_{b_{1}b_{2}}  0.037924
+6  #Delta #eta_{lep_{1}#tau_{1}}  0.030327
+7                 #phi_{lep_{1}}  0.016838
+8         #Delta #phi_{b_{2}MET}  0.013643
+9                #phi_{#tau_{1}}  0.013495
+trainLab size: 9384, trainPred size: 9384
+signal_dict = {'LQ_LQ_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1500/LQ_LQ_1500_semileptonic_dLQ.csv'], 'Tau_LQ_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1500/Tau_LQ_1500_semileptonic_dLQ.csv'], 'Tau_Tau_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1500/Tau_Tau_1500_semileptonic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_semileptonic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_semileptonic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/semileptonic_dLQ/M1500_XGB.joblib
+================================================================================================================================================================
+Mass: 1750, channel: semileptonic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 250}
+The train accuracy is 0.9604449938195303 and the test test accuracy is 0.9406741573033708
+The most important variables are:
+                               0         1
+0                        sT(GeV)  0.578120
+1  #Delta #phi_{lep_{1}#tau_{1}}  0.135817
+2        Q_{lep_{1}}Q_{#tau_{1}}  0.091026
+3       #Delta #phi_{lep_{1}MET}  0.053694
+4       #Delta #eta_{b_{1}b_{2}}  0.047312
+5          #Delta R_{b_{1}b_{2}}  0.031926
+6  #Delta #eta_{lep_{1}#tau_{1}}  0.021721
+7         #Delta #phi_{b_{2}MET}  0.016857
+8                 #phi_{lep_{1}}  0.013184
+9                #phi_{#tau_{1}}  0.010343
+trainLab size: 8899, trainPred size: 8899
+signal_dict = {'LQ_LQ_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1750/LQ_LQ_1750_semileptonic_dLQ.csv'], 'Tau_LQ_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1750/Tau_LQ_1750_semileptonic_dLQ.csv'], 'Tau_Tau_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1750/Tau_Tau_1750_semileptonic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_semileptonic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_semileptonic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/semileptonic_dLQ/M1750_XGB.joblib
+================================================================================================================================================================
+Mass: 2000, channel: semileptonic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 250}
+The train accuracy is 0.9608077298881772 and the test test accuracy is 0.9339991315675207
+The most important variables are:
+                               0         1
+0                        sT(GeV)  0.601605
+1        Q_{lep_{1}}Q_{#tau_{1}}  0.110854
+2  #Delta #phi_{lep_{1}#tau_{1}}  0.108594
+3       #Delta #phi_{lep_{1}MET}  0.058616
+4       #Delta #eta_{b_{1}b_{2}}  0.037474
+5          #Delta R_{b_{1}b_{2}}  0.023492
+6  #Delta #eta_{lep_{1}#tau_{1}}  0.020403
+7         #Delta #phi_{b_{2}MET}  0.014371
+8                #phi_{#tau_{1}}  0.013145
+9                 #phi_{lep_{1}}  0.011448
+trainLab size: 9211, trainPred size: 9211
+signal_dict = {'LQ_LQ_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2000/LQ_LQ_2000_semileptonic_dLQ.csv'], 'Tau_LQ_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2000/Tau_LQ_2000_semileptonic_dLQ.csv'], 'Tau_Tau_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2000/Tau_Tau_2000_semileptonic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_semileptonic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_semileptonic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/semileptonic_dLQ/M2000_XGB.joblib
+================================================================================================================================================================
+Mass: 2250, channel: semileptonic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 250}
+The train accuracy is 0.999798893916541 and the test test accuracy is 0.9433051869722557
+The most important variables are:
+                               0         1
+0                        sT(GeV)  0.521773
+1        Q_{lep_{1}}Q_{#tau_{1}}  0.180198
+2  #Delta #phi_{lep_{1}#tau_{1}}  0.097763
+3       #Delta #phi_{lep_{1}MET}  0.046688
+4       #Delta #eta_{b_{1}b_{2}}  0.042277
+5          #Delta R_{b_{1}b_{2}}  0.029314
+6  #Delta #eta_{lep_{1}#tau_{1}}  0.027062
+7                 #phi_{lep_{1}}  0.019165
+8         #Delta #phi_{b_{2}MET}  0.018969
+9                #phi_{#tau_{1}}  0.016792
+trainLab size: 9945, trainPred size: 9945
+signal_dict = {'LQ_LQ_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2250/LQ_LQ_2250_semileptonic_dLQ.csv'], 'Tau_LQ_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2250/Tau_LQ_2250_semileptonic_dLQ.csv'], 'Tau_Tau_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2250/Tau_Tau_2250_semileptonic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_semileptonic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_semileptonic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/semileptonic_dLQ/M2250_XGB.joblib
+================================================================================================================================================================
+Mass: 2500, channel: semileptonic_dLQ
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 9, 'n_estimators': 125}
+The train accuracy is 0.9992868785656072 and the test test accuracy is 0.9425427872860636
+The most important variables are:
+                               0         1
+0                        sT(GeV)  0.556443
+1        Q_{lep_{1}}Q_{#tau_{1}}  0.161503
+2  #Delta #phi_{lep_{1}#tau_{1}}  0.092420
+3       #Delta #phi_{lep_{1}MET}  0.052162
+4       #Delta #eta_{b_{1}b_{2}}  0.032269
+5          #Delta R_{b_{1}b_{2}}  0.031693
+6  #Delta #eta_{lep_{1}#tau_{1}}  0.021458
+7         #Delta #phi_{b_{2}MET}  0.019538
+8                 #phi_{lep_{1}}  0.016920
+9                #phi_{#tau_{1}}  0.015596
+trainLab size: 9816, trainPred size: 9816
+signal_dict = {'LQ_LQ_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2500/LQ_LQ_2500_semileptonic_dLQ.csv'], 'Tau_LQ_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2500/Tau_LQ_2500_semileptonic_dLQ.csv'], 'Tau_Tau_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2500/Tau_Tau_2500_semileptonic_dLQ.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_semileptonic_dLQ.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_semileptonic_dLQ.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/semileptonic_dLQ/M2500_XGB.joblib
+The channel semileptonic_dLQ takes 0.18631678561369577 hours.

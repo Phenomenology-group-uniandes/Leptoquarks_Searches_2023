@@ -1,0 +1,131 @@
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 250}
+The most important variables are:
+['sT(GeV)', 'Q_{#tau_{1}}Q_{#tau_{2}}', '#Delta R_{#tau_{1}#tau_{2}}', 'light_jets_multiplicity', '#Delta #phi_{#tau_{2}MET}', '#Delta #phi_{#tau_{1}#tau_{2}}', '#Delta #eta_{#tau_{1}#tau_{2}}', '#phi_{#tau_{2}}', '#phi_{MET}', '#phi_{#tau_{1}}']
+================================================================================================================================================================
+Mass: 1250, channel: hadronic_non-resonant
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 125}
+The train accuracy is 0.9456925675675676 and the test test accuracy is 0.9158783783783784
+The most important variables are:
+                                0         1
+0                         sT(GeV)  0.453750
+1        Q_{#tau_{1}}Q_{#tau_{2}}  0.199037
+2         light_jets_multiplicity  0.132915
+3     #Delta R_{#tau_{1}#tau_{2}}  0.106324
+4       #Delta #phi_{#tau_{2}MET}  0.027270
+5  #Delta #phi_{#tau_{1}#tau_{2}}  0.021560
+6  #Delta #eta_{#tau_{1}#tau_{2}}  0.015189
+7                 #phi_{#tau_{2}}  0.014765
+8                      #phi_{MET}  0.014607
+9                 #phi_{#tau_{1}}  0.014583
+trainLab size: 11840, trainPred size: 11840
+signal_dict = {'LQ_LQ_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1250/LQ_LQ_1250_hadronic_non-resonant.csv'], 'Tau_LQ_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1250/Tau_LQ_1250_hadronic_non-resonant.csv'], 'Tau_Tau_1250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1250/Tau_Tau_1250_hadronic_non-resonant.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_non-resonant.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_non-resonant.csv'], 'stop': ['/disco4/pheno_csv_files/Leptoquarks_Searches/stop/stop_hadronic_non-resonant.csv'], 'diboson': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ww/ww_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/wz/wz_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/zz/zz_hadronic_non-resonant.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_non-resonant/M1250_XGB.joblib
+================================================================================================================================================================
+Mass: 1500, channel: hadronic_non-resonant
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 125}
+The train accuracy is 0.9324324324324325 and the test test accuracy is 0.925
+The most important variables are:
+                                0         1
+0                         sT(GeV)  0.505540
+1         light_jets_multiplicity  0.155979
+2        Q_{#tau_{1}}Q_{#tau_{2}}  0.142465
+3     #Delta R_{#tau_{1}#tau_{2}}  0.105311
+4       #Delta #phi_{#tau_{2}MET}  0.030359
+5  #Delta #phi_{#tau_{1}#tau_{2}}  0.023424
+6  #Delta #eta_{#tau_{1}#tau_{2}}  0.010924
+7                 #phi_{#tau_{2}}  0.009615
+8                 #phi_{#tau_{1}}  0.009013
+9                      #phi_{MET}  0.007371
+trainLab size: 11840, trainPred size: 11840
+signal_dict = {'LQ_LQ_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1500/LQ_LQ_1500_hadronic_non-resonant.csv'], 'Tau_LQ_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1500/Tau_LQ_1500_hadronic_non-resonant.csv'], 'Tau_Tau_1500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1500/Tau_Tau_1500_hadronic_non-resonant.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_non-resonant.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_non-resonant.csv'], 'stop': ['/disco4/pheno_csv_files/Leptoquarks_Searches/stop/stop_hadronic_non-resonant.csv'], 'diboson': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ww/ww_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/wz/wz_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/zz/zz_hadronic_non-resonant.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_non-resonant/M1500_XGB.joblib
+================================================================================================================================================================
+Mass: 1750, channel: hadronic_non-resonant
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 125}
+The train accuracy is 0.9362331081081081 and the test test accuracy is 0.9222972972972973
+The most important variables are:
+                                0         1
+0                         sT(GeV)  0.487006
+1        Q_{#tau_{1}}Q_{#tau_{2}}  0.153728
+2         light_jets_multiplicity  0.149663
+3     #Delta R_{#tau_{1}#tau_{2}}  0.119736
+4       #Delta #phi_{#tau_{2}MET}  0.027290
+5  #Delta #phi_{#tau_{1}#tau_{2}}  0.023234
+6                 #phi_{#tau_{2}}  0.011441
+7                      #phi_{MET}  0.010395
+8  #Delta #eta_{#tau_{1}#tau_{2}}  0.009754
+9                 #phi_{#tau_{1}}  0.007753
+trainLab size: 11840, trainPred size: 11840
+signal_dict = {'LQ_LQ_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_1750/LQ_LQ_1750_hadronic_non-resonant.csv'], 'Tau_LQ_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_1750/Tau_LQ_1750_hadronic_non-resonant.csv'], 'Tau_Tau_1750': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_1750/Tau_Tau_1750_hadronic_non-resonant.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_non-resonant.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_non-resonant.csv'], 'stop': ['/disco4/pheno_csv_files/Leptoquarks_Searches/stop/stop_hadronic_non-resonant.csv'], 'diboson': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ww/ww_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/wz/wz_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/zz/zz_hadronic_non-resonant.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_non-resonant/M1750_XGB.joblib
+================================================================================================================================================================
+Mass: 2000, channel: hadronic_non-resonant
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 125}
+The train accuracy is 0.955320945945946 and the test test accuracy is 0.9260135135135135
+The most important variables are:
+                                0         1
+0                         sT(GeV)  0.472883
+1        Q_{#tau_{1}}Q_{#tau_{2}}  0.186750
+2         light_jets_multiplicity  0.139097
+3     #Delta R_{#tau_{1}#tau_{2}}  0.104287
+4       #Delta #phi_{#tau_{2}MET}  0.021968
+5  #Delta #phi_{#tau_{1}#tau_{2}}  0.019926
+6                 #phi_{#tau_{1}}  0.015564
+7                      #phi_{MET}  0.014303
+8  #Delta #eta_{#tau_{1}#tau_{2}}  0.013875
+9                 #phi_{#tau_{2}}  0.011346
+trainLab size: 11840, trainPred size: 11840
+signal_dict = {'LQ_LQ_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2000/LQ_LQ_2000_hadronic_non-resonant.csv'], 'Tau_LQ_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2000/Tau_LQ_2000_hadronic_non-resonant.csv'], 'Tau_Tau_2000': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2000/Tau_Tau_2000_hadronic_non-resonant.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_non-resonant.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_non-resonant.csv'], 'stop': ['/disco4/pheno_csv_files/Leptoquarks_Searches/stop/stop_hadronic_non-resonant.csv'], 'diboson': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ww/ww_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/wz/wz_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/zz/zz_hadronic_non-resonant.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_non-resonant/M2000_XGB.joblib
+================================================================================================================================================================
+Mass: 2250, channel: hadronic_non-resonant
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 125}
+The train accuracy is 0.9583614864864864 and the test test accuracy is 0.9304054054054054
+The most important variables are:
+                                0         1
+0                         sT(GeV)  0.479880
+1        Q_{#tau_{1}}Q_{#tau_{2}}  0.169181
+2         light_jets_multiplicity  0.161749
+3     #Delta R_{#tau_{1}#tau_{2}}  0.088504
+4       #Delta #phi_{#tau_{2}MET}  0.025394
+5  #Delta #phi_{#tau_{1}#tau_{2}}  0.020143
+6  #Delta #eta_{#tau_{1}#tau_{2}}  0.015859
+7                 #phi_{#tau_{1}}  0.013473
+8                      #phi_{MET}  0.013460
+9                 #phi_{#tau_{2}}  0.012358
+trainLab size: 11840, trainPred size: 11840
+signal_dict = {'LQ_LQ_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2250/LQ_LQ_2250_hadronic_non-resonant.csv'], 'Tau_LQ_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2250/Tau_LQ_2250_hadronic_non-resonant.csv'], 'Tau_Tau_2250': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2250/Tau_Tau_2250_hadronic_non-resonant.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_non-resonant.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_non-resonant.csv'], 'stop': ['/disco4/pheno_csv_files/Leptoquarks_Searches/stop/stop_hadronic_non-resonant.csv'], 'diboson': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ww/ww_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/wz/wz_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/zz/zz_hadronic_non-resonant.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_non-resonant/M2250_XGB.joblib
+================================================================================================================================================================
+Mass: 2500, channel: hadronic_non-resonant
+For the Gradient_Boosting model
+The Best Parameters are {'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 125}
+The train accuracy is 0.961402027027027 and the test test accuracy is 0.9347972972972973
+The most important variables are:
+                                0         1
+0                         sT(GeV)  0.457768
+1        Q_{#tau_{1}}Q_{#tau_{2}}  0.179791
+2         light_jets_multiplicity  0.158067
+3     #Delta R_{#tau_{1}#tau_{2}}  0.105818
+4       #Delta #phi_{#tau_{2}MET}  0.023299
+5  #Delta #phi_{#tau_{1}#tau_{2}}  0.022165
+6                 #phi_{#tau_{1}}  0.014893
+7  #Delta #eta_{#tau_{1}#tau_{2}}  0.013159
+8                 #phi_{#tau_{2}}  0.012627
+9                      #phi_{MET}  0.012413
+trainLab size: 11840, trainPred size: 11840
+signal_dict = {'LQ_LQ_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/LQ_LQ_2500/LQ_LQ_2500_hadronic_non-resonant.csv'], 'Tau_LQ_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_LQ_2500/Tau_LQ_2500_hadronic_non-resonant.csv'], 'Tau_Tau_2500': ['/disco4/pheno_csv_files/Leptoquarks_Searches/Tau_Tau_2500/Tau_Tau_2500_hadronic_non-resonant.csv']}
+bkgs_dict = {'ttbar': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ttbar/ttbar_hadronic_non-resonant.csv'], 'z_jets': ['/disco4/pheno_csv_files/Leptoquarks_Searches/z_jets/z_jets_hadronic_non-resonant.csv'], 'stop': ['/disco4/pheno_csv_files/Leptoquarks_Searches/stop/stop_hadronic_non-resonant.csv'], 'diboson': ['/disco4/pheno_csv_files/Leptoquarks_Searches/ww/ww_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/wz/wz_hadronic_non-resonant.csv', '/disco4/pheno_csv_files/Leptoquarks_Searches/zz/zz_hadronic_non-resonant.csv']}
+The model was saved in: /disco4/personal_folders/Joaquin/2023/Semanas_07_08_09/Leptoquarks_Searches_2023/04_ML_Classification/XGB_models/hadronic_non-resonant/M2500_XGB.joblib
+The channel hadronic_non-resonant takes 0.16658852179845174 hours.
