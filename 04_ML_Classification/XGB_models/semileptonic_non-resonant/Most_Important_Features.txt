@@ -1,10 +1,10 @@
 sT(GeV)
 Q_{lep_{1}}Q_{#tau_{1}}
 #Delta R_{lep_{1}#tau_{1}}
-#Delta #phi_{lep_{1}#tau_{1}}
 #Delta #phi_{lep_{1}MET}
+#Delta #phi_{lep_{1}#tau_{1}}
 #Delta pT_{lep_{1}MET}(GeV)
-#phi_{MET}
 #Delta #eta_{lep_{1}#tau_{1}}
-#phi_{#tau_{1}}
 #phi_{lep_{1}}
+#phi_{#tau_{1}}
+#phi_{MET}

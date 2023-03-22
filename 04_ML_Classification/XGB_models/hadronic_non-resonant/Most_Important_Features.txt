@@ -1,10 +1,10 @@
 sT(GeV)
-Q_{#tau_{1}}Q_{#tau_{2}}
 #Delta R_{#tau_{1}#tau_{2}}
-light_jets_multiplicity
+Q_{#tau_{1}}Q_{#tau_{2}}
 #Delta #phi_{#tau_{2}MET}
 #Delta #phi_{#tau_{1}#tau_{2}}
-#Delta #eta_{#tau_{1}#tau_{2}}
-#phi_{#tau_{2}}
-#phi_{MET}
+#Delta pT_{#tau_{2}MET}(GeV)
 #phi_{#tau_{1}}
+#eta_{#tau_{1}}
+#phi_{MET}
+#phi_{#tau_{2}}
