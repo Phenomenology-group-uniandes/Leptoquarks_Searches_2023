@@ -102,6 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+hep_pheno_tools
 .env
 .venv
 env/
