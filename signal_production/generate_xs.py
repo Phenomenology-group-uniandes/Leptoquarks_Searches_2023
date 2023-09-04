@@ -20,12 +20,31 @@ if not os.path.exists(mod2_vlq_ufo_path):
         )
 
 
-decay_modes = f"""
+decay_modes_headers = f"""
 import model {mod2_vlq_ufo_path}
 generate vlq > all all
 add process zp > all all
 """
+tau_tau_header = f"""
+import model {mod2_vlq_ufo_path}
+generate p p > ta+ ta- / zp QED=0 QCD=0
+"""
+headers = {
+"decay_modes": decay_modes_headers,
+"non-res": tau_tau_header
+}
 
+parton_kin_gen_cuts = {
+    "cut_decays" : True,
+    "ptb" : 30,
+    "ptj" : 20,
+    "ptl" : 20,
+    "etab" : 2.5,
+    "pt_min_pdg" : "{15: 30}",
+    "eta_max_pdg" : '{15: 2.5}',
+    'mxx_min_pdg' : '{15:100}'
+}
+   
 
 def generate_param_cards(
         mass,
@@ -42,7 +61,7 @@ def generate_param_cards(
 
     # Write mg5 script with decay modes
     f = open(os.path.join(mg5_output_folder, "calculate_decay_width.mg5"), "w")
-    f.write(decay_modes)
+    f.write(headers[decay_modes_headers])
     f.write(f"output {mg5_output_folder} -nojpeg\n")
     f.close()
     run_mg5(os.path.join(mg5_output_folder, "calculate_decay_width.mg5"))
@@ -80,13 +99,74 @@ def generate_param_cards(
     os.rmdir(mg5_output_folder)
 
 
-def generate_xs(
+def generate_mg5_output_script(
+        mg5_output_folder: str,
+        channel: str = "tau_tau"
+        ):
+    script_path = os.path.join(mg5_output_folder, "generate_mg5_output.mg5")
+    # Write mg5 script with production mode
+    f = open(script_path, "w")
+    f.write(headers[channel])
+    f.write(f"output {mg5_output_folder} -nojpeg\n")
+    f.close()
+    run_mg5(script_path)
+    return mg5_output_folder
+
+
+def launch_mg5(
         mass,
         g,
-        param_cards_path: str,
+        param_cards_folder_path: str,
         model_parameters: dict,
         temp_dir: str,
-        mod2_vlq_ufo_path: str = mod2_vlq_ufo_path,
+        channel: str = "non-res",
+        case: str = "woRHC",
+        n_events: int = 10000,
+        n_workers: int = 3,
+        kin_gen_cuts: dict = parton_kin_gen_cuts
         ):
-    cmpd(model_parameters)
-    pass
+
+    paramcard_path = os.path.join(
+        param_cards_folder_path,
+        str(mass),
+        str(g).replace(".", "_"),
+        "param_card.dat"
+        )
+    if not os.path.exists(paramcard_path):
+        generate_param_cards(
+            mass,
+            g,
+            param_card_dir=os.path.dirname(paramcard_path),
+            model_parameters=model_parameters[case],
+            temp_dir=temp_dir,
+            seeds=list(),
+            n_events=int(n_events/10)
+            )
+    mg5_output_folder = os.path.join(
+        temp_dir,
+        case,
+        channel,
+        str(mass),
+        str(g)
+        )
+    os.makedirs(mg5_output_folder, exist_ok=True)
+
+    # check if mg5_output_folder is empty
+    if not os.listdir(mg5_output_folder):
+        generate_mg5_output_script(
+            mg5_output_folder=mg5_output_folder,
+            channel=channel
+            )
+    # Write me script to launch mg5
+    f = open(os.path.join(mg5_output_folder, "generate_events.mg5"), "w")
+    f.write(f"launch {mg5_output_folder} -m\n")
+    f.write(f"{n_workers}\ndone\n")
+    seed = get_new_seed(get_seeds_from_mg5_output_folder(mg5_output_folder))
+    f.write(f"set iseed {seed}\n")
+    f.write(f"set nevents {n_events}\n")
+    f.write('set sde_strategy 1\n')
+    [f.write(f"set {cut} {kin_gen_cuts[cut]}\n") for cut in kin_gen_cuts]
+    f.write(f"{paramcard_path}\n")
+    f.write("exit\n")
+    f.close()
+    run_mg5(os.path.join(mg5_output_folder, "generate_events.mg5"))
