@@ -132,8 +132,8 @@ def launch_mg5(
 
     paramcard_path = os.path.join(
         param_cards_folder_path,
-        str(mass),
-        str(g).replace(".", "_"),
+        f"MU{int(mass)}",
+        f"GU{g}".replace(".", "_"),
         "param_card.dat"
         )
     if not os.path.exists(paramcard_path):

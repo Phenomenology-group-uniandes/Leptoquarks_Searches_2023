@@ -1,4 +1,4 @@
-from convert_matrices_to_params_dict import (
+from .convert_matrices_to_params_dict import (
   convert_matrices_to_params_dict,
   model_parameters
 )
