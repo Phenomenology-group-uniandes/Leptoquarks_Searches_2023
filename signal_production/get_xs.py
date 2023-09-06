@@ -5,9 +5,8 @@ from hep_pheno_tools.madgraph_tools import get_seeds_from_mg5_output_folder
 from hep_pheno_tools.madgraph_tools import get_new_seed
 from hep_pheno_tools.madgraph_tools import run_mg5
 
-from .convert_matrices_to_params_dict import model_parameters
-from .generate_outputs import generate_param_cards
 from .generate_outputs import generate_mg5_output_script
+from .generate_outputs import get_param_card_file_path
 
 
 def get_xs(
@@ -22,22 +21,15 @@ def get_xs(
         n_workers: int = mp.cpu_count()
         ):
 
-    paramcard_path = os.path.join(
+    paramcard_path = get_param_card_file_path(
+        mass,
+        g,
         param_cards_folder_path,
-        f"MU{int(mass)}",
-        f"GU{g}".replace(".", "_"),
-        "param_card.dat"
+        temp_dir,
+        case,
+        n_events
         )
-    if not os.path.exists(paramcard_path):
-        generate_param_cards(
-            mass,
-            g,
-            param_card_dir=os.path.dirname(paramcard_path),
-            model_parameters=model_parameters[case],
-            temp_dir=temp_dir,
-            seeds=list(),
-            n_events=int(n_events/10)
-            )
+
     mg5_output_folder = os.path.join(
         temp_dir,
         case,

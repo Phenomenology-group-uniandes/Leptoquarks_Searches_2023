@@ -2,9 +2,6 @@ import os
 import shutil
 import subprocess
 import tempfile
-from signal_production.get_xs import (
-    get_xs
-    )
 
 # Download the framework or update it
 try:
@@ -16,6 +13,9 @@ except ImportError:
     git_url = f"git@github.com:{user}/{framework}.git"
     subprocess.run(["git", "clone", git_url])
     import hep_pheno_tools
+from signal_production.get_xs import (
+    get_xs
+    )
 
 # Delete all the temp folders
 [shutil.rmtree(f) for f in os.listdir(os.getcwd()) if "tmp" in f]
@@ -46,8 +46,8 @@ if __name__ == "__main__":
         kin_gen_cuts=parton_kin_gen_cuts,
         channel="non-res",
         case="woRHC",
-        n_events=1000,
-        n_workers=3
+        n_events=50000,
+        # n_workers=3
         )
     # delete temp dir
     shutil.rmtree(TEMP_DIR)

@@ -4,6 +4,7 @@ import tempfile
 from hep_pheno_tools.madgraph_tools import run_mg5
 from hep_pheno_tools.madgraph_tools import get_new_seed
 from .convert_matrices_to_params_dict import convert_matrices_to_params_dict
+from .convert_matrices_to_params_dict import model_parameters
 
 current_file_path = os.path.abspath(__file__)
 parent_directory_path = os.path.dirname(current_file_path)
@@ -101,3 +102,31 @@ def generate_mg5_output_script(
     f.close()
     run_mg5(script_path)
     return mg5_output_folder
+
+
+def get_param_card_file_path(
+        mass,
+        g,
+        param_cards_folder_path: str,
+        temp_dir: str,
+        case: str = "woRHC",
+        n_events: int = 1000
+        ):
+    paramcard_path = os.path.join(
+        param_cards_folder_path,
+        f"MU{int(mass)}",
+        f"GU{g}".replace(".", "_"),
+        case,
+        "param_card.dat"
+        )
+    if not os.path.exists(paramcard_path):
+        generate_param_cards(
+            mass,
+            g,
+            param_card_dir=os.path.dirname(paramcard_path),
+            model_parameters=model_parameters[case],
+            temp_dir=temp_dir,
+            seeds=list(),
+            n_events=int(n_events/10)
+            )
+    return paramcard_path
