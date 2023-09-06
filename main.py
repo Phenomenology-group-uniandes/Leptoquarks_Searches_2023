@@ -3,7 +3,7 @@ import shutil
 import subprocess
 import tempfile
 from signal_production.generate_xs import (
-    launch_mg5
+    get_xs
     )
 
 # Download the framework or update it
@@ -23,15 +23,27 @@ except ImportError:
 # Create a temporary directory
 TEMP_DIR = tempfile.mkdtemp(dir=os.getcwd())
 PARAMS_DIR = os.path.join(os.getcwd(), "data", "Pararamcards")
+# Define the kinematic generation cuts
+parton_kin_gen_cuts = {
+    "cut_decays": True,
+    "ptb": 30,
+    "ptj": 20,
+    "ptl": 20,
+    "etab": 2.5,
+    "pt_min_pdg": "{15: 30}",
+    "eta_max_pdg": '{15: 2.5}',
+    'mxx_min_pdg': '{15:100}'
+}
 
 
 if __name__ == "__main__":
     print(TEMP_DIR)
-    launch_mg5(
+    get_xs(
         mass=1000,
         g=1,
         param_cards_folder_path=PARAMS_DIR,
         temp_dir=TEMP_DIR,
+        kin_gen_cuts=parton_kin_gen_cuts,
         channel="non-res",
         case="woRHC",
         n_events=1000,
