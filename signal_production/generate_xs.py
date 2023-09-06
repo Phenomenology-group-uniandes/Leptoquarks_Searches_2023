@@ -1,10 +1,11 @@
 import os
+import shutil
 import tempfile
-from . import convert_matrices_to_params_dict as cmpd
-from ..hep_pheno_tools.madgraph_tools import run_mg5
-from ..hep_pheno_tools.madgraph_tools import get_new_seed
-from ..hep_pheno_tools.madgraph_tools import get_seed_from_banner
-from ..hep_pheno_tools.madgraph_tools import get_seeds_from_mg5_output_folder
+from .convert_matrices_to_params_dict import model_parameters
+from .convert_matrices_to_params_dict import convert_matrices_to_params_dict
+from hep_pheno_tools.madgraph_tools import get_seeds_from_mg5_output_folder
+from hep_pheno_tools.madgraph_tools import get_new_seed
+from hep_pheno_tools.madgraph_tools import run_mg5
 
 current_file_path = os.path.abspath(__file__)
 parent_directory_path = os.path.dirname(current_file_path)
@@ -30,21 +31,21 @@ import model {mod2_vlq_ufo_path}
 generate p p > ta+ ta- / zp QED=0 QCD=0
 """
 headers = {
-"decay_modes": decay_modes_headers,
-"non-res": tau_tau_header
+    "decay_modes": decay_modes_headers,
+    "non-res": tau_tau_header
 }
 
 parton_kin_gen_cuts = {
-    "cut_decays" : True,
-    "ptb" : 30,
-    "ptj" : 20,
-    "ptl" : 20,
-    "etab" : 2.5,
-    "pt_min_pdg" : "{15: 30}",
-    "eta_max_pdg" : '{15: 2.5}',
-    'mxx_min_pdg' : '{15:100}'
+    "cut_decays": True,
+    "ptb": 30,
+    "ptj": 20,
+    "ptl": 20,
+    "etab": 2.5,
+    "pt_min_pdg": "{15: 30}",
+    "eta_max_pdg": '{15: 2.5}',
+    'mxx_min_pdg': '{15:100}'
 }
-   
+
 
 def generate_param_cards(
         mass,
@@ -54,21 +55,22 @@ def generate_param_cards(
         temp_dir: str,
         seeds: list,
         n_events: int = 1000,
+        gzp=0,
         ):
     mg5_output_folder = tempfile.mkdtemp(dir=temp_dir)
     os.makedirs(mg5_output_folder, exist_ok=True)
-    param_card_dict = cmpd(model_parameters)
+    param_card_dict = convert_matrices_to_params_dict(model_parameters)
 
     # Write mg5 script with decay modes
     f = open(os.path.join(mg5_output_folder, "calculate_decay_width.mg5"), "w")
-    f.write(headers[decay_modes_headers])
+    f.write(headers["decay_modes"])
     f.write(f"output {mg5_output_folder} -nojpeg\n")
     f.close()
     run_mg5(os.path.join(mg5_output_folder, "calculate_decay_width.mg5"))
 
     # Write me script to calculate decay width
     f = open(os.path.join(mg5_output_folder, "calculate_decay_width.me"), "w")
-    f.write(f"launch {mg5_output_folder} -i\n")
+    # f.write(f"launch {mg5_output_folder} -i\n")
     f.write("calculate_decay_widths\n")
     seed = get_new_seed(seeds)
     # set run_card
@@ -77,10 +79,14 @@ def generate_param_cards(
     # set param_card
     f.write(f"set MVLQ {mass}\n")
     f.write(f"set GU {gu}\n")
+    f.write(f"set GZP {gzp}\n")
     [f.write(f"set {key} {value}\n") for key, value in param_card_dict.items()]
     f.write("exit\n")
     f.close()
-    run_mg5(os.path.join(mg5_output_folder, "calculate_decay_width.me"))
+    run_mg5(
+        os.path.join(mg5_output_folder, "calculate_decay_width.me"),
+        MG5_PATH=os.path.join(mg5_output_folder, "bin", "madevent"),
+        )
 
     # Copy param_card.dat into param_cards_path
     source = os.path.join(
@@ -90,13 +96,12 @@ def generate_param_cards(
         "param_card.dat"
         )
     if not os.path.exists(source):
-        os.rmdir(mg5_output_folder)
         raise FileNotFoundError(f"Path to param_card.dat not found: {source}")
     target = os.path.join(param_card_dir, "param_card.dat")
     os.makedirs(os.path.dirname(target), exist_ok=True)
     os.rename(source, target)
     # Clear temp dir
-    os.rmdir(mg5_output_folder)
+    shutil.rmtree(mg5_output_folder)
 
 
 def generate_mg5_output_script(
@@ -117,7 +122,6 @@ def launch_mg5(
         mass,
         g,
         param_cards_folder_path: str,
-        model_parameters: dict,
         temp_dir: str,
         channel: str = "non-res",
         case: str = "woRHC",
