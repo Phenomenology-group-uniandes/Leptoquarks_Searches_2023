@@ -113,6 +113,7 @@ env.bak/
 venv.bak/
 
 # madgraph debug
+ME5_debug
 py.py
 
 
