@@ -2,7 +2,8 @@ import os
 import time
 import shutil
 import subprocess
-import itertools
+from itertools import product
+import multiprocessing as mp
 import tempfile
 
 # Download the framework or update it
@@ -47,11 +48,15 @@ mass_step = 125
 lower_g_u = 0.5
 upper_g_u = 3.5
 g_u_step = 0.25
+parton_n_events = 20000
+
+n_workers = 2
 
 
 # decorator to show the execution time of a function
 def timer(func):
     def wrapper(*args, **kwargs):
+        print(f"Running {func.__name__}...")
         start = time.time()
         result = func(*args, **kwargs)
         elapsed = time.time() - start
@@ -62,33 +67,43 @@ def timer(func):
     return wrapper
 
 
+def gen_csv_matrix(x):
+    case, channel = x
+    xs_matrix = get_xs_matrix(
+        lower_mass=lower_mass,
+        upper_mass=upper_mass,
+        mass_step=mass_step,
+        lower_g_u=lower_g_u,
+        upper_g_u=upper_g_u,
+        g_u_step=g_u_step,
+        case=case,
+        channel=channel,
+        n_events=parton_n_events,
+        test=False,
+        param_cards_folder_path=PARAMS_DIR,
+        temp_dir=TEMP_DIR,
+        kin_gen_cuts=parton_kin_gen_cuts,
+        n_workers=int(mp.cpu_count()/n_workers)
+    )
+    csv_path = os.path.join(
+        DATA_DIR,
+        "cross_sections",
+        case,
+        channel,
+        "xs_matrix.csv"
+    )
+    os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+    xs_matrix.to_csv(csv_path)
+
+
 @timer
 def gen_csv_matrices():
-    for case, channel in itertools.product(cases, channels):
-        xs_matrix = get_xs_matrix(
-            lower_mass=lower_mass,
-            upper_mass=upper_mass,
-            mass_step=mass_step,
-            lower_g_u=lower_g_u,
-            upper_g_u=upper_g_u,
-            g_u_step=g_u_step,
-            case=case,
-            channel=channel,
-            n_events=10000,
-            test=True,
-            param_cards_folder_path=PARAMS_DIR,
-            temp_dir=TEMP_DIR,
-            kin_gen_cuts=parton_kin_gen_cuts
+    print("Generating cross section matrices...")
+    with mp.Pool() as pool:
+        pool.map(
+            gen_csv_matrix,
+            product(cases, channels)
         )
-        csv_path = os.path.join(
-            DATA_DIR,
-            "cross_sections",
-            case,
-            channel,
-            "xs_matrix.csv"
-        )
-        os.makedirs(os.path.dirname(csv_path), exist_ok=True)
-        xs_matrix.to_csv(csv_path)
 
 
 if __name__ == "__main__":

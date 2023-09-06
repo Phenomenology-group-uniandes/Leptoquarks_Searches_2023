@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import multiprocessing as mp
 import itertools
+from tqdm import tqdm
 from .get_xs import get_xs
 
 
@@ -28,7 +29,8 @@ def get_xs_matrix(
         M_U = np.array([1000, 1250])
         g_U = np.array([1.0, 1.75])
     xs_matrix = pd.DataFrame(index=g_U, columns=M_U)
-    for m, g in itertools.product(M_U, g_U):
+
+    for m, g in tqdm(itertools.product(M_U, g_U), total=len(M_U) * len(g_U)):
         xs = get_xs(
             mass=m,
             g=g,
