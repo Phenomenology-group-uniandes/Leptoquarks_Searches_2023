@@ -1,6 +1,10 @@
 import os
+import shutil
 import subprocess
 import tempfile
+from signal_production.generate_xs import (
+    launch_mg5
+    )
 
 # Download the framework or update it
 try:
@@ -13,12 +17,25 @@ except ImportError:
     subprocess.run(["git", "clone", git_url])
     import hep_pheno_tools
 
+# Delete all the temp folders
+[shutil.rmtree(f) for f in os.listdir(os.getcwd()) if "tmp" in f]
 
-# Create a temporary directory inside the framework
-TEMP_DIR = tempfile.mkdtemp(dir=hep_pheno_tools.__path__[0])
+# Create a temporary directory
+TEMP_DIR = tempfile.mkdtemp(dir=os.getcwd())
+PARAMS_DIR = os.path.join(os.getcwd(), "data", "Pararamcards")
 
 
 if __name__ == "__main__":
     print(TEMP_DIR)
+    launch_mg5(
+        mass=1000,
+        g=1,
+        param_cards_folder_path=PARAMS_DIR,
+        temp_dir=TEMP_DIR,
+        channel="non-res",
+        case="woRHC",
+        n_events=1000,
+        n_workers=3
+        )
     # delete temp dir
-    os.rmdir(TEMP_DIR)
+    shutil.rmtree(TEMP_DIR)
