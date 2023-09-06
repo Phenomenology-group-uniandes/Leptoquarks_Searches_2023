@@ -31,7 +31,7 @@ def get_xs(
         param_cards_folder_path,
         temp_dir,
         case,
-        n_events
+        n_events/5
         )
 
     mg5_output_folder = tempfile.mkdtemp(dir=temp_dir)
