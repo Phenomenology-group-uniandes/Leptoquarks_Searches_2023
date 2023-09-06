@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 import tempfile
-from signal_production.generate_xs import (
+from signal_production.get_xs import (
     get_xs
     )
 
