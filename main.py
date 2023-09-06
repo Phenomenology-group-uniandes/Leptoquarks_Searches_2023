@@ -31,15 +31,15 @@ parton_kin_gen_cuts = {
     "ptl": 20,
     "etab": 2.5,
     "pt_min_pdg": "{15: 30}",
-    "eta_max_pdg": '{15: 2.5}',
-    'mxx_min_pdg': '{15:100}'
+    # "eta_max_pdg": '{15: 2.5}',
+    # 'mxx_min_pdg': '{15:100}'
 }
 
 
 if __name__ == "__main__":
     print(TEMP_DIR)
-    get_xs(
-        mass=1000,
+    xs = get_xs(
+        mass=1250,
         g=1,
         param_cards_folder_path=PARAMS_DIR,
         temp_dir=TEMP_DIR,
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         channel="non-res",
         case="woRHC",
         n_events=50000,
-        # n_workers=3
         )
+    print(xs)
     # delete temp dir
     shutil.rmtree(TEMP_DIR)

@@ -1,5 +1,9 @@
 import os
+import shutil
+import tempfile
 import multiprocessing as mp
+
+import pandas as pd
 
 from hep_pheno_tools.madgraph_tools import get_seeds_from_mg5_output_folder
 from hep_pheno_tools.madgraph_tools import get_new_seed
@@ -10,8 +14,8 @@ from .generate_outputs import get_param_card_file_path
 
 
 def get_xs(
-        mass,
-        g,
+        mass: float,
+        g: float,
         param_cards_folder_path: str,
         temp_dir: str,
         kin_gen_cuts: dict,
@@ -30,14 +34,7 @@ def get_xs(
         n_events
         )
 
-    mg5_output_folder = os.path.join(
-        temp_dir,
-        case,
-        channel,
-        str(mass),
-        str(g)
-        )
-    os.makedirs(mg5_output_folder, exist_ok=True)
+    mg5_output_folder = tempfile.mkdtemp(dir=temp_dir)
 
     # check if mg5_output_folder is empty
     if not os.listdir(mg5_output_folder):
@@ -58,3 +55,13 @@ def get_xs(
     f.write("exit\n")
     f.close()
     run_mg5(os.path.join(mg5_output_folder, "generate_events.mg5"))
+
+    t = pd.read_html(os.path.join(mg5_output_folder, "crossx.html"))[0]
+    try:
+        xs = float(t['Cross section (pb)'][0].split(" ")[0])
+    except ValueError:
+        xs = 0.0
+
+    # clean mg5_output_folder
+    shutil.rmtree(mg5_output_folder)
+    return xs
