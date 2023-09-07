@@ -40,15 +40,19 @@ parton_kin_gen_cuts = {
 }
 
 cases = ["woRHC", "wRHC"]
-channels = ["non-res"]
+channels = [
+    "non-res",
+    "sLQ",
+    "dLQ"
+    ]
 
-lower_mass = 1000
-upper_mass = 3500
+lower_mass = 7500
+upper_mass = 5000
 mass_step = 125
 lower_g_u = 0.5
 upper_g_u = 3.5
 g_u_step = 0.25
-parton_n_events = 20000
+parton_n_events = 10000
 
 n_workers = 2
 

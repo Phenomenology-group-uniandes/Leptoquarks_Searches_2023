@@ -27,9 +27,23 @@ tau_tau_header = f"""
 import model {mod2_vlq_ufo_path}
 generate p p > ta+ ta- / zp QED=0 QCD=0
 """
+single_LQ_header = f"""
+import model {mod2_vlq_ufo_path}
+define qb = b b~
+define lq = vlq vlq~
+generate p p > qb lq / zp QED=0 QCD=0
+"""
+double_LQ_header = f"""
+import model {mod2_vlq_ufo_path}
+define qb = b b~
+define lq = vlq vlq~
+generate p p > lq lq / zp QED=0 QCD=0
+"""
 headers = {
     "decay_modes": decay_modes_headers,
-    "non-res": tau_tau_header
+    "non-res": tau_tau_header,
+    "sLQ": single_LQ_header,
+    "dLQ": double_LQ_header,
 }
 
 
