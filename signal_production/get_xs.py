@@ -2,6 +2,7 @@ import os
 import shutil
 import tempfile
 import multiprocessing as mp
+from io import StringIO
 
 import pandas as pd
 
@@ -56,7 +57,10 @@ def get_xs(
     f.close()
     run_mg5(os.path.join(mg5_output_folder, "generate_events.mg5"))
 
-    t = pd.read_html(os.path.join(mg5_output_folder, "crossx.html"))[0]
+    with open(os.path.join(mg5_output_folder, "crossx.html"), 'r') as f:
+        html_string = f.read()
+
+    t = pd.read_html(StringIO(html_string))[0]
     try:
         xs = float(t['Cross section (pb)'][0].split(" ")[0])
     except ValueError:
