@@ -29,15 +29,14 @@ generate p p > ta+ ta- / zp QED=0 QCD=0
 """
 single_LQ_header = f"""
 import model {mod2_vlq_ufo_path}
-define qb = b b~
+define ta = ta+ ta-
 define lq = vlq vlq~
-generate p p > qb lq / zp QED=0 QCD=0
+generate p p > ta lq / zp QED=0
 """
 double_LQ_header = f"""
 import model {mod2_vlq_ufo_path}
-define qb = b b~
 define lq = vlq vlq~
-generate p p > lq lq / zp QED=0 QCD=0
+generate p p > lq lq
 """
 headers = {
     "decay_modes": decay_modes_headers,
