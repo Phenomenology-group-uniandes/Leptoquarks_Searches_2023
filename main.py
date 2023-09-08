@@ -52,7 +52,7 @@ mass_step = 125
 lower_g_u = 0.5
 upper_g_u = 3.5
 g_u_step = 0.25
-parton_n_events = 20000
+parton_n_events = 30000
 
 n_workers = 2
 
@@ -98,10 +98,11 @@ def gen_csv_matrix(x):
     )
     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
     xs_matrix.to_csv(csv_path)
+    xs_matrix.to_excel(csv_path.replace(".csv", ".xlsx"))
 
 
 @timer
-def gen_csv_matrices(cases, channels):
+def gen_xs_matrices(cases, channels):
     print("Generating cross section matrices...")
     with mp.Pool() as pool:
         pool.map(
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     print(TEMP_DIR)
 
     # calculate cross sections matrices
-    gen_csv_matrices(cases, channels)
+    gen_xs_matrices(cases, channels)
 
     # Run Full Simulations with preselections
 
