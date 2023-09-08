@@ -46,13 +46,13 @@ channels = [
     "dLQ"
     ]
 
-lower_mass = 7500
+lower_mass = 500
 upper_mass = 5000
 mass_step = 125
 lower_g_u = 0.5
 upper_g_u = 3.5
 g_u_step = 0.25
-parton_n_events = 10000
+parton_n_events = 20000
 
 n_workers = 2
 
@@ -101,7 +101,7 @@ def gen_csv_matrix(x):
 
 
 @timer
-def gen_csv_matrices():
+def gen_csv_matrices(cases, channels):
     print("Generating cross section matrices...")
     with mp.Pool() as pool:
         pool.map(
@@ -112,6 +112,29 @@ def gen_csv_matrices():
 
 if __name__ == "__main__":
     print(TEMP_DIR)
-    gen_csv_matrices()
-    # delete temp dir
+
+    # calculate cross sections matrices
+    gen_csv_matrices(cases, channels)
+
+    # Run Full Simulations with preselections
+
+    # Parton level kinematic distributions
+
+    # Hadr. level kinematic distributions
+
+    # Cut flow tables
+
+    # Preselection efficiency matrices
+
+    # N Events on preselection
+
+    # Run ML Algorithms
+
+    # ML output distributions
+
+    # Normalize ML output distributions
+
+    # Calculate Significances and Limits
+
+    # Delete temp dir
     shutil.rmtree(TEMP_DIR)
