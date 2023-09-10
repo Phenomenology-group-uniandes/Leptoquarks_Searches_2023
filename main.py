@@ -48,7 +48,7 @@ channels = [
 
 lower_mass = 500
 upper_mass = 5000
-mass_step = 125
+mass_step = 250
 lower_g_u = 0.5
 upper_g_u = 3.5
 g_u_step = 0.25
@@ -109,15 +109,52 @@ def gen_xs_matrices(cases, channels):
             gen_csv_matrix,
             product(cases, channels)
         )
+    pass
+
+
+# Matrix of Distributions, I use the gu=1 distro for all gu values
+def get_xgb_matrix(channel_name, case):
+    xgb_distro_gu1 = np.loadtxt(
+        os.path.join(
+            XGB_distros_path,
+            case,
+            "M1000",
+            f"high_per_bin_{channel_name}.txt"
+        )
+    )
+    n_bins = len(xgb_distro_gu1)
+    xgb_matrix = np.zeros((len(masses), len(gu_values), n_bins))
+    for i, mass in enumerate(masses):
+        if mass < 1000:
+            m = 1000
+        elif mass > 2500:
+            m = 2500
+        else:
+            m = mass
+        xgb_distro_gu1 = np.loadtxt(
+            os.path.join(
+                XGB_distros_path,
+                case,
+                f"M{m}",
+                f"high_per_bin_{channel_name}.txt"
+            )
+        )
+        xgb_distro_gu1 = xgb_distro_gu1 / sum(xgb_distro_gu1)
+        for (j, gu), (k, bin_content) in product(
+            enumerate(gu_values),
+            enumerate(xgb_distro_gu1)
+        ):
+            xgb_matrix[i, j, k] = bin_content
+    return xgb_matrix
 
 
 if __name__ == "__main__":
     print(TEMP_DIR)
 
     # calculate cross sections matrices
-    gen_xs_matrices(cases, channels)
+    # gen_xs_matrices(cases, channels)
 
-    # Run Full Simulations with preselections
+    # Run Full Simulations with preselections wuth gu fixed, gu = 1.
 
     # Parton level kinematic distributions
 
@@ -130,8 +167,29 @@ if __name__ == "__main__":
     # N Events on preselection
 
     # Run ML Algorithms
+    XGB_distros_path = os.path.join(DATA_DIR, "XGB_distros")
 
     # ML output distributions
+    import numpy as np
+    masses = np.arange(lower_mass, upper_mass+mass_step, mass_step)
+    gu_values = np.arange(lower_g_u, upper_g_u+g_u_step, g_u_step)
+    signal_channel_name = {
+        "non-res": "tau_tau",
+        "sLQ": "tau_Lq",
+        "dLQ": "Lq_Lq",
+        "combined": "Combined"
+    }
+    bkg_channel_name = {
+        'ttbar': 'tbart',
+        'Vjets': 'V+jets',
+        'VV': 'Diboson',
+        'single_top': 'Single top',
+    }
+
+    signal_channel_distros = {
+        key: get_xgb_matrix(value, "wRHC")
+        for key, value in signal_channel_name.items()
+        }
 
     # Normalize ML output distributions
 
