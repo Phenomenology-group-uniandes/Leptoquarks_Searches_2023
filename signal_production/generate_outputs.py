@@ -10,14 +10,13 @@ current_file_path = os.path.abspath(__file__)
 parent_directory_path = os.path.dirname(current_file_path)
 model_directory_path = os.path.join(
     os.path.dirname(parent_directory_path), "model"
-    )
+)
 mod2_vlq_ufo_path = os.path.join(model_directory_path, "Mod2_VLQ_UFO")
 
 if not os.path.exists(mod2_vlq_ufo_path):
-
     raise FileNotFoundError(
         f"Path to Mod2_VLQ_UFO not found: {mod2_vlq_ufo_path}"
-        )
+    )
 decay_modes_headers = f"""
 import model {mod2_vlq_ufo_path}
 generate vlq > all all
@@ -47,15 +46,15 @@ headers = {
 
 
 def generate_param_cards(
-        mass,
-        gu,
-        param_card_dir: str,
-        model_parameters: dict,
-        temp_dir: str,
-        seeds: list,
-        n_events: int = 1000,
-        gzp=0,
-        ):
+    mass,
+    gu,
+    param_card_dir: str,
+    model_parameters: dict,
+    temp_dir: str,
+    seeds: list,
+    n_events: int = 1000,
+    gzp=0,
+):
     mg5_output_folder = tempfile.mkdtemp(dir=temp_dir)
     os.makedirs(mg5_output_folder, exist_ok=True)
     param_card_dict = convert_matrices_to_params_dict(model_parameters)
@@ -85,15 +84,12 @@ def generate_param_cards(
     run_mg5(
         os.path.join(mg5_output_folder, "calculate_decay_width.me"),
         MG5_PATH=os.path.join(mg5_output_folder, "bin", "madevent"),
-        )
+    )
 
     # Copy param_card.dat into param_cards_path
     source = os.path.join(
-        mg5_output_folder,
-        "Events",
-        "run_01",
-        "param_card.dat"
-        )
+        mg5_output_folder, "Events", "run_01", "param_card.dat"
+    )
     if not os.path.exists(source):
         raise FileNotFoundError(f"Path to param_card.dat not found: {source}")
     target = os.path.join(param_card_dir, "param_card.dat")
@@ -104,9 +100,8 @@ def generate_param_cards(
 
 
 def generate_mg5_output_script(
-        mg5_output_folder: str,
-        channel: str = "tau_tau"
-        ):
+    mg5_output_folder: str, channel: str = "tau_tau"
+):
     script_path = os.path.join(mg5_output_folder, "generate_mg5_output.mg5")
     # Write mg5 script with production mode
     f = open(script_path, "w")
@@ -118,20 +113,20 @@ def generate_mg5_output_script(
 
 
 def get_param_card_file_path(
-        mass,
-        g,
-        param_cards_folder_path: str,
-        temp_dir: str,
-        case: str = "woRHC",
-        n_events: int = 1000
-        ):
+    mass,
+    g,
+    param_cards_folder_path: str,
+    temp_dir: str,
+    case: str = "woRHC",
+    n_events: int = 1000,
+):
     paramcard_path = os.path.join(
         param_cards_folder_path,
         f"MU{int(mass)}",
         f"GU{g}".replace(".", "_"),
         case,
-        "param_card.dat"
-        )
+        "param_card.dat",
+    )
     if not os.path.exists(paramcard_path):
         generate_param_cards(
             mass,
@@ -140,6 +135,6 @@ def get_param_card_file_path(
             model_parameters=model_parameters[case],
             temp_dir=temp_dir,
             seeds=list(),
-            n_events=int(n_events/10)
-            )
+            n_events=int(n_events / 10),
+        )
     return paramcard_path

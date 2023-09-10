@@ -6,9 +6,12 @@ from itertools import product
 import multiprocessing as mp
 import tempfile
 
+import pandas as pd
+
 # Download the framework or update it
 try:
     import hep_pheno_tools
+
     hep_pheno_tools.update()
 except ImportError:
     user = "Phenomenology-group-uniandes"
@@ -40,11 +43,7 @@ parton_kin_gen_cuts = {
 }
 
 cases = ["woRHC", "wRHC"]
-channels = [
-    "non-res",
-    "sLQ",
-    "dLQ"
-    ]
+signal_production_channels = ["non-res", "sLQ", "dLQ"]
 
 lower_mass = 500
 upper_mass = 5000
@@ -68,6 +67,7 @@ def timer(func):
         minutes, seconds = divmod(rem, 60)
         print(f"Elapsed time: {hours:.0f}h {minutes:.0f}m {seconds:.2f}s")
         return result
+
     return wrapper
 
 
@@ -87,14 +87,10 @@ def gen_csv_matrix(x):
         param_cards_folder_path=PARAMS_DIR,
         temp_dir=TEMP_DIR,
         kin_gen_cuts=parton_kin_gen_cuts,
-        n_workers=int(mp.cpu_count()/n_workers)
+        n_workers=int(mp.cpu_count() / n_workers),
     )
     csv_path = os.path.join(
-        DATA_DIR,
-        "cross_sections",
-        case,
-        channel,
-        "xs_matrix.csv"
+        DATA_DIR, "cross_sections", case, channel, "xs_matrix.csv"
     )
     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
     xs_matrix.to_csv(csv_path)
@@ -105,10 +101,7 @@ def gen_csv_matrix(x):
 def gen_xs_matrices(cases, channels):
     print("Generating cross section matrices...")
     with mp.Pool() as pool:
-        pool.map(
-            gen_csv_matrix,
-            product(cases, channels)
-        )
+        pool.map(gen_csv_matrix, product(cases, channels))
     pass
 
 
@@ -116,10 +109,7 @@ def gen_xs_matrices(cases, channels):
 def get_xgb_matrix(channel_name, case):
     xgb_distro_gu1 = np.loadtxt(
         os.path.join(
-            XGB_distros_path,
-            case,
-            "M1000",
-            f"high_per_bin_{channel_name}.txt"
+            XGB_distros_path, case, "M1000", f"high_per_bin_{channel_name}.txt"
         )
     )
     n_bins = len(xgb_distro_gu1)
@@ -136,23 +126,42 @@ def get_xgb_matrix(channel_name, case):
                 XGB_distros_path,
                 case,
                 f"M{m}",
-                f"high_per_bin_{channel_name}.txt"
+                f"high_per_bin_{channel_name}.txt",
             )
         )
         xgb_distro_gu1 = xgb_distro_gu1 / sum(xgb_distro_gu1)
         for (j, gu), (k, bin_content) in product(
-            enumerate(gu_values),
-            enumerate(xgb_distro_gu1)
+            enumerate(gu_values), enumerate(xgb_distro_gu1)
         ):
             xgb_matrix[i, j, k] = bin_content
     return xgb_matrix
+
+
+def get_bkg_events(channel, bkg_groups):
+    bkg_events = {}
+    luminosity = 137
+    for group in bkg_groups:
+        n_events = 0
+        for bkg in bkg_groups[group]:
+            bkg_xs = pd.read_excel(
+                os.path.join(xs_path, "bkg_xs.xlsx"), index_col=0
+            )
+            bkg_xs = bkg_xs[bkg]["xs"]
+            bkg_eff = pd.read_excel(
+                os.path.join(eff_path, channel, "backgrounds.xlsx"),
+                index_col=0,
+            )
+            eff = bkg_eff[bkg]["DeltaR > 0.3"]
+            n_events += bkg_xs * eff * luminosity * 1000
+        bkg_events[group] = n_events
 
 
 if __name__ == "__main__":
     print(TEMP_DIR)
 
     # calculate cross sections matrices
-    # gen_xs_matrices(cases, channels)
+    # gen_xs_matrices(cases, signal_production_channels)
+    xs_path = os.path.join(DATA_DIR, "cross_sections")
 
     # Run Full Simulations with preselections wuth gu fixed, gu = 1.
 
@@ -161,35 +170,66 @@ if __name__ == "__main__":
     # Hadr. level kinematic distributions
 
     # Cut flow tables
+    eff_path = os.path.join(DATA_DIR, "abs_efficiencies")
+    # Calculate number of events physical events that pass the cuts
 
-    # Preselection efficiency matrices
+    bkg_groups = {
+        "ttbar": ["ttbar"],
+        "single_top": ["stop"],
+        "Vjets": ["w_jets", "z_jets"],
+        "VV": ["ww", "zz", "wz"],
+    }
 
-    # N Events on preselection
+    signal_groups = {
+        "combined": ["non-res", "sLQ", "dLQ"],
+        "non-res": ["non-res"],
+        "sLQ": ["sLQ"],
+        "dLQ": ["dLQ"],
+    }
+    channels = [
+        "0b_2tau_hadronic",
+        "0b_2tau_semileptonic",
+        "1b_2tau_hadronic",
+        "1b_2tau_semileptonic",
+        "2b_2tau_hadronic",
+        "2b_2tau_semileptonic",
+    ]
+    channel = channels[0]
+
+    bkg_events = get_bkg_events(channel, bkg_groups)
 
     # Run ML Algorithms
     XGB_distros_path = os.path.join(DATA_DIR, "XGB_distros")
 
     # ML output distributions
     import numpy as np
-    masses = np.arange(lower_mass, upper_mass+mass_step, mass_step)
-    gu_values = np.arange(lower_g_u, upper_g_u+g_u_step, g_u_step)
-    signal_channel_name = {
+
+    masses = np.arange(lower_mass, upper_mass + mass_step, mass_step)
+    gu_values = np.arange(lower_g_u, upper_g_u + g_u_step, g_u_step)
+    signal_name = {
         "non-res": "tau_tau",
         "sLQ": "tau_Lq",
         "dLQ": "Lq_Lq",
-        "combined": "Combined"
+        "combined": "Combined",
     }
-    bkg_channel_name = {
-        'ttbar': 'tbart',
-        'Vjets': 'V+jets',
-        'VV': 'Diboson',
-        'single_top': 'Single top',
+    bkg_name = {
+        "ttbar": "tbart",
+        "Vjets": "V+jets",
+        "VV": "Diboson",
+        "single_top": "stop",
     }
 
+    case = "woRHC"
+
     signal_channel_distros = {
-        key: get_xgb_matrix(value, "wRHC")
-        for key, value in signal_channel_name.items()
-        }
+        key: get_xgb_matrix(value, case) for key, value in signal_name.items()
+    }
+
+    bkg_channel_distros = {
+        key: get_xgb_matrix(value, case) * bkg_events[key]
+        for key, value in bkg_name.items()
+    }
+    print(bkg_channel_distros["ttbar"][1][1].sum())
 
     # Normalize ML output distributions
 

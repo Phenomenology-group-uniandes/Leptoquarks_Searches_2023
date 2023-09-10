@@ -10,46 +10,39 @@ from .generate_outputs import get_param_card_file_path
 
 
 def launch_fullsim(
-        mass: float,
-        g: float,
-        param_cards_folder_path: str,
-        pythia_card_path: str,
-        delphes_card_path: str,
-        temp_dir: str,
-        kin_gen_cuts: dict,
-        data_dir: str,
-        channel: str = "non-res",
-        case: str = "woRHC",
-        n_events: int = 50000,
-        n_workers: int = mp.cpu_count()
-        ):
-
+    mass: float,
+    g: float,
+    param_cards_folder_path: str,
+    pythia_card_path: str,
+    delphes_card_path: str,
+    temp_dir: str,
+    kin_gen_cuts: dict,
+    data_dir: str,
+    channel: str = "non-res",
+    case: str = "woRHC",
+    n_events: int = 50000,
+    n_workers: int = mp.cpu_count(),
+):
     paramcard_path = get_param_card_file_path(
-        mass,
-        g,
-        param_cards_folder_path,
-        temp_dir,
-        case,
-        n_events/50
-        )
+        mass, g, param_cards_folder_path, temp_dir, case, n_events / 50
+    )
 
     mg5_output = os.path.join(temp_dir, channel, case, f"mg5_{mass}_{g}")
     os.makedirs(mg5_output, exist_ok=True)
     data_output = os.path.join(
         data_dir,
-        f'MU{mass}',
-        f'GU{g}',
+        f"MU{mass}",
+        f"GU{g}",
         case,
         channel,
-        )
+    )
     os.makedirs(data_output, exist_ok=True)
 
     # check if mg5_output_folder is empty
     if not os.listdir(mg5_output):
         generate_mg5_output_script(
-            mg5_output_folder=mg5_output,
-            channel=channel
-            )
+            mg5_output_folder=mg5_output, channel=channel
+        )
     # get seeds used
     seeds = get_seeds_from_mg5_output_folder(data_output)
     seed = get_new_seed(seeds)
@@ -63,7 +56,7 @@ def launch_fullsim(
     # set run_card
     f.write(f"set iseed {seed}\n")
     f.write(f"set nevents {n_events}\n")
-    f.write('set sde_strategy 1\n')
+    f.write("set sde_strategy 1\n")
     [f.write(f"set {cut} {kin_gen_cuts[cut]}\n") for cut in kin_gen_cuts]
     # set param_card, pythia_card, and delphes_card
     f.write(f"{paramcard_path}\n")
