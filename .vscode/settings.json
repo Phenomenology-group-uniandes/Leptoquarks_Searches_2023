@@ -1,0 +1,37 @@
+{
+  // Python
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+  },
+
+  // Python: isort and black
+  "isort.args": [
+    "--profile",
+    "black"
+  ],
+
+  // Max line length black
+  "black-formatter.args": [
+    "--line-length",
+    "79"
+  ],
+  // Max line length flake
+  "flake8.args": [
+    "--max-line-length=79"
+  ],
+  // View line on editor
+  "editor.rulers": [
+    {
+      "column": 75,
+      "color": "#22ff002d",
+    },
+    {
+      "column": 80,
+      "color": "#ff000068",
+    }
+  ],
+}
