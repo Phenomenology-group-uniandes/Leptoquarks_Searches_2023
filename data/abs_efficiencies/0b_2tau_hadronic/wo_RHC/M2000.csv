@@ -1,0 +1,8 @@
+,dLQ,sLQ,non-res
+All,1.0,1.0,1.0
+Maximum 1 light lepton,0.9780275,0.9622275,0.9598733333333334
+At least 2 leptons,0.10717125,0.18117125,0.22248
+Exactly 2 leptons,0.10395375,0.17692375,0.22092
+hadronic selection,0.0442025,0.074175,0.09844
+non-resonant selection,0.006225,0.02153,0.06966
+DeltaR > 0.3,0.006225,0.02153,0.06966
