@@ -1,12 +1,16 @@
-import os
 import multiprocessing as mp
+import os
 
-from hep_pheno_tools.madgraph_tools import get_seeds_from_mg5_output_folder
-from hep_pheno_tools.madgraph_tools import get_new_seed
-from hep_pheno_tools.madgraph_tools import run_mg5
+from hep_pheno_tools.madgraph_tools import (
+    get_new_seed,
+    get_seeds_from_mg5_output_folder,
+    run_mg5,
+)
 
-from .generate_outputs import generate_mg5_output_script
-from .generate_outputs import get_param_card_file_path
+from .generate_outputs import (
+    generate_mg5_output_script,
+    get_param_card_file_path,
+)
 
 
 def launch_fullsim(
