@@ -1,14 +1,18 @@
 import multiprocessing as mp
 import os
+import pickle
 import shutil
 import subprocess
 import tempfile
 import time
 from itertools import product
 
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 from hep_pheno_tools.analysis_tools import approx_global_sig
+from hep_pheno_tools.analysis_tools.heatmaps_tools import plot_heatmap, smooth
 from stats import get_xgb_matrix
 
 # Download the framework or update it
@@ -47,7 +51,7 @@ parton_kin_gen_cuts = {
     # 'mxx_min_pdg': '{15:100}'
 }
 
-cases = ["woRHC", "wRHC"]
+cases = ["woRHC", "wRHC", "oRHC"]
 signal_production_channels = ["non-res", "sLQ", "dLQ"]
 
 lower_mass = 500
@@ -190,7 +194,9 @@ def get_signal_channel_distros(
     channel, signal_groups, masses, gu_values, case
 ):
     signal_channel_distros = {}
+
     for key, value in signal_groups.items():
+        signal = key
         matrix = get_xgb_matrix(
             signal_name[value[0]],
             channel,
@@ -200,14 +206,19 @@ def get_signal_channel_distros(
             gu_values,
             integral=1.0,
         )
+        if signal == "non-res":
+            scale_factor = 1
+        elif signal == "sLQ":
+            scale_factor = 2
+        elif signal == "dLQ":
+            scale_factor = 4
         for (i, mass), (j, gu) in product(
             enumerate(masses), enumerate(gu_values)
         ):
             signal_events = get_signal_events(
                 channel, signal_groups, mass, gu, case
             )[key]
-            # matrix[mass][gu] *= signal_events
-            matrix[i][j] *= signal_events
+            matrix[i][j] *= signal_events * scale_factor
         signal_channel_distros[key] = matrix
 
     return signal_channel_distros
@@ -351,7 +362,7 @@ print(TEMP_DIR)
 # Run ML Algorithms
 
 # ML output distributions
-import numpy as np
+
 
 masses = np.arange(lower_mass, upper_mass + mass_step, mass_step)
 gu_values = np.arange(lower_g_u, upper_g_u + g_u_step, g_u_step)
@@ -386,7 +397,7 @@ bkg_name = {
 # print(bkg_channel_distros["ttbar"][1][1].sum())
 
 # Calculate Significances and Limits
-case = "wRHC"
+case = "woRHC"
 signal_list = ["non-res", "sLQ", "dLQ", "combined"]
 significances = {
     signal: calculate_significance(case, signal, masses, gu_values)
@@ -394,11 +405,6 @@ significances = {
 }
 # Delete temp dir
 shutil.rmtree(TEMP_DIR)
-
-import matplotlib.pyplot as plt
-import pandas as pd
-
-from hep_pheno_tools.analysis_tools.heatmaps_tools import plot_heatmap, smooth
 
 
 def Calcular_g_U(c_U, M):
@@ -469,11 +475,9 @@ def get_curves(signal):
     return curves
 
 
-import pickle
-
 for signal in ["non-res", "sLQ", "dLQ", "combined"]:
     curves = get_curves(signal)
-    path = os.path.join(DATA_DIR, "significances_curves", case, signal)
+    path = os.path.join(DATA_DIR, "significances_curves", "other_test", signal)
     os.makedirs(path, exist_ok=True)
-    with open(os.path.join(path, "curves.pkl"), "wb") as f:
+    with open(os.path.join(path, "curves_1.0.pkl"), "wb") as f:
         pickle.dump(curves, f)
